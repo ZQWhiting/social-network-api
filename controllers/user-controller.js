@@ -14,7 +14,7 @@ const userController = {
 	// get one user by id
 	getUserById({ params }, res) {
 		User.findOne({ _id: params.id })
-			.populate(
+			.populate([
 				{
 					path: 'thoughts',
 					select: '-__v',
@@ -22,8 +22,8 @@ const userController = {
 				{
 					path: 'friends',
 					select: '-__v',
-				}
-			)
+				},
+			])
 			.select('-__v')
 			.then((dbUserData) => {
 				//if no user is found, send 404
@@ -85,7 +85,7 @@ const userController = {
 	removeFriend({ params }, res) {
 		User.findOneAndUpdate(
 			{ _id: params.userId },
-			{ $pull: { friends: { _id: params.friendId } } },
+			{ $pull: { friends: params.friendId } },
 			{ new: true }
 		)
 			.then((dbUserData) => {
