@@ -94,23 +94,25 @@ const userController = {
 			.catch((err) => res.json(err));
 	},
 	// delete user
-	removeUser({ params }, res) {
-		User.findOneAndDelete({ _id: params.id })
-			.then((dbUserData) => {
-				if (!dbUserData) {
-					res.status(404).json({
-						message: 'No user found with this id!',
-					});
-					return;
-				}
-				return Thought.deleteMany({
-					_id: { $in: dbUserData.thoughts },
-				}).then((response) => {
-					res.json({
-						message: `Success`,
-						dbUserData,
-						thoughtsDeleted: response.deletedCount,
-					});
+	async removeUser({ params }, res) {
+		[dbUserData, dbFriendData] = await Promise.all([
+			User.findOneAndDelete({ _id: params.id }),
+			User.update({}, { $pull: { friends: params.id } }, { multi: true }),
+		]).catch((err) => res.status(400).json(err));
+		if (!dbUserData) {
+			res.status(404).json({
+				message: 'No user found with this id!',
+			});
+			return;
+		}
+		Thought.deleteMany({
+			_id: { $in: dbUserData.thoughts },
+		})
+			.then((thoughtResponse) => {
+				res.json({
+					message: `Success`,
+					dbUserData,
+					thoughtsDeleted: thoughtResponse.deletedCount,
 				});
 			})
 			.catch((err) => res.status(400).json(err));
