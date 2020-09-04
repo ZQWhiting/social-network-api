@@ -10,6 +10,7 @@ This is a NoSQL social network api built using MongoDB, Mongoose, and Express.js
 * [Installation](#Installation)
 * [Usage](#Usage)
 * [License](#License)
+* [Credits](#Credits)
 
 <a name='installation'></a>
 ## Installation
