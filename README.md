@@ -45,3 +45,9 @@ Test in an api tester such as [Insomnia](https://insomnia.rest).
 <a name='license'></a>
 ## License
 Licensed under the [MIT](./LICENSE.txt) license.
+
+<a name='creadits'></a>
+## Credits
+Created by ZQWhiting.
+[Github](https://github.com/ZQWhiting)
+[LinkedIn](https://www.linkedin.com/in/zqwhiting)
