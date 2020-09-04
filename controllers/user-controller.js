@@ -48,11 +48,18 @@ const userController = {
 	},
 	// add new friend to a user's friend list
 	createFriend({ params }, res) {
-		User.findOneAndUpdate(
-			{ _id: params.userId },
-			{ $push: { friends: { _id: params.friendId } } },
-			{ new: true, runValidators: true }
-		)
+		Promise.all([
+			User.findOneAndUpdate(
+				{ _id: params.userId },
+				{ $push: { friends: params.friendId } },
+				{ new: true, runValidators: true }
+			),
+			User.findOneAndUpdate(
+				{ _id: params.friendId },
+				{ $push: { friends: params.userId } },
+				{ new: true, runValidators: true }
+			),
+		])
 			.then((dbUserData) => {
 				if (!dbUserData) {
 					res.status(404).json({
@@ -83,11 +90,18 @@ const userController = {
 	},
 	// delete friend from user's friend list
 	removeFriend({ params }, res) {
-		User.findOneAndUpdate(
-			{ _id: params.userId },
-			{ $pull: { friends: params.friendId } },
-			{ new: true }
-		)
+		Promise.all([
+			User.findOneAndUpdate(
+				{ _id: params.userId },
+				{ $pull: { friends: params.friendId } },
+				{ new: true }
+			),
+			User.findOneAndUpdate(
+				{ _id: params.friendId },
+				{ $pull: { friends: params.userId } },
+				{ new: true }
+			),
+		])
 			.then((dbUserData) => {
 				res.json(dbUserData);
 			})
