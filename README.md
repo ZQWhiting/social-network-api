@@ -48,6 +48,6 @@ Licensed under the [MIT](./LICENSE.txt) license.
 
 <a name='creadits'></a>
 ## Credits
-Created by ZQWhiting.
-[Github](https://github.com/ZQWhiting)
-[LinkedIn](https://www.linkedin.com/in/zqwhiting)
+Created by ZQWhiting:
+[Github](https://github.com/ZQWhiting),
+[LinkedIn](https://www.linkedin.com/in/zqwhiting).
