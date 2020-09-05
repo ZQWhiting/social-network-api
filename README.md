@@ -20,6 +20,10 @@ This is a NoSQL social network api built using MongoDB, Mongoose, and Express.js
 
 <a name='usage'></a>
 ## Usage
+[Walkthrough Part 1](https://youtu.be/sEXbH2ATQ0Y)  
+[Walkthrough Part 2](https://youtu.be/tYRKz61uB3Y)  
+[Walkthrough Part 3](https://youtu.be/lVI90k-DTNc)  
+
 Test in an api tester such as [Insomnia](https://insomnia.rest). 
  Test queries: 
  * localhost:3001/api/users
